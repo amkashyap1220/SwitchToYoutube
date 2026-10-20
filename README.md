@@ -52,7 +52,7 @@ Keep these two values handy for the next step. Treat the secret like a password.
 1. Get the code and open a terminal in the project folder:
 
    ```bash
-   git clone https://github.com/<your-username>/Switch-To-Youtube.git
+   git clone https://github.com/amkashyap1220/Switch-To-Youtube.git
    cd Switch-To-Youtube
    ```
 
