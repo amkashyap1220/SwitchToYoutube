@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% block head %}{% endblock %}
+  <title>Switch To YouTube</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>Switch To YouTube</h1>
+  {% for message in get_flashed_messages() %}
+    <p class="error">{{ message }}</p>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</body>
+</html>

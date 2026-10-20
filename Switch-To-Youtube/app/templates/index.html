@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>1. Spotify</h2>
+{% if spotify_connected %}
+  <p>Connected.</p>
+{% elif not has_spotify_keys %}
+  <p class="error">Add your Spotify keys to .env and restart (see README).</p>
+{% else %}
+  <p><a href="/spotify/login">Connect Spotify</a></p>
+{% endif %}
+
+<h2>2. YouTube Music</h2>
+{% if youtube_connected %}
+  <p>Connected.</p>
+{% else %}
+  <p>Paste the request headers from music.youtube.com (see README for how):</p>
+  <form method="post" action="/youtube/login">
+    <textarea name="headers" rows="8" required></textarea>
+    <button>Save</button>
+  </form>
+{% endif %}
+
+{% if spotify_connected %}
+<h2>3. Pick what to copy</h2>
+<form method="post" action="/transfer">
+  <p><label><input type="checkbox" id="select-all" onclick="selectAll(this.checked)"> Select all</label></p>
+  <label><input type="checkbox" name="liked" checked> <b>Liked Songs</b></label>
+  {% for playlist in playlists %}
+    <label><input type="checkbox" name="playlist" value="{{ playlist.id }}"> {{ playlist.name }} <span class="muted">({{ playlist.song_count }})</span></label>
+  {% endfor %}
+  <p><button {% if not youtube_connected %}disabled{% endif %}>Start transfer</button></p>
+</form>
+
+<script>
+  function selectAll(checked) {
+    for (const box of document.querySelectorAll("input[name=playlist]")) {
+      box.checked = checked;
+    }
+  }
+</script>
+{% endif %}
+
+{% endblock %}

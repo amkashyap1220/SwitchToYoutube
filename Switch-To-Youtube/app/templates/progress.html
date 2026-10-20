@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {% if progress.running %}<meta http-equiv="refresh" content="3">{% endif %}
+{% endblock %}
+
+{% block content %}
+<p><a href="/">Back</a></p>
+
+<h2>{{ progress.status or "Nothing running" }}</h2>
+{% if progress.running and progress.total > 0 %}
+  <progress value="{{ progress.done }}" max="{{ progress.total }}"></progress>
+  <p class="muted">{{ progress.done }} / {{ progress.total }}</p>
+{% endif %}
+
+{% if progress.error %}
+  <p class="error">{{ progress.error }}</p>
+{% endif %}
+
+{% for result in progress.results %}
+  <h3>{{ result.name }}</h3>
+  {% if result.error %}
+    <p class="error">{{ result.error }}</p>
+  {% else %}
+    <p>Found {{ result.found }} of {{ result.total }} songs.</p>
+    {% if result.not_found %}
+      <details>
+        <summary>Not found ({{ result.not_found | length }})</summary>
+        <ul>
+          {% for song in result.not_found %}<li>{{ song }}</li>{% endfor %}
+        </ul>
+      </details>
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,30 @@
+body {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 0 16px;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+label {
+  display: block;
+  padding: 2px 0;
+}
+
+textarea {
+  width: 100%;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+progress {
+  width: 100%;
+}
+
+.muted {
+  color: #777;
+}
+
+.error {
+  color: #c00;
+}
